@@ -1,6 +1,6 @@
 #![feature(async_closure)]
-// use catppuccin::Flavour;
-// use colored::*;
+use catppuccin::Flavour;
+use colored::*;
 use std::{
     io::{self, stdin, Write},
     process,
@@ -27,10 +27,11 @@ async fn main() {
         // Chrome is in path
         true => {
             let mut cond = false;
-            // let (r, g, b) = Flavour::Mocha.green().into();
+            let (r, g, b) = Flavour::Mocha.green().into();
             println!(
                 "{}",
-                "Enter GlobalExam URL given by your school :" // .custom_color(CustomColor::new(r, g, b))
+                "Enter GlobalExam URL given by your school :"
+                    .custom_color(CustomColor::new(r, g, b))
             );
             while !cond {
                 // Reading the URL from user input
@@ -62,25 +63,26 @@ async fn main() {
                         let scraper: Scraper = Scraper { url: &res, driver };
 
                         // Ask user to connect to GloabelExam
-                        // let (r, g, b) = Flavour::Mocha.blue().into();
+                        let (r, g, b) = Flavour::Mocha.blue().into();
                         println!(
                             "{}",
-                            "Please connect to the plateforme and press ENTER" // .custom_color(CustomColor::new(r, g, b))
+                            "Please connect to the plateforme and press ENTER"
+                                .custom_color(CustomColor::new(r, g, b))
                         );
                         let is_connected = scraper.is_connected(res).await.unwrap();
 
                         if is_connected {
-                            scraper.get_ge_stats(&res).await.unwrap();
+                            scraper.get_stats(&res).await.unwrap();
                             io::stdout().flush().unwrap();
                         }
 
                         cond = true;
                     }
                     false => {
-                        // let (r, g, b) = Flavour::Mocha.red().into();
+                        let (r, g, b) = Flavour::Mocha.red().into();
                         print!(
                             "{}",
-                            "Please, enter a valid URL\n" //.custom_color(CustomColor::new(r, g, b))
+                            "Please, enter a valid URL\n".custom_color(CustomColor::new(r, g, b))
                         );
                         io::stdout().flush().unwrap();
                     }
